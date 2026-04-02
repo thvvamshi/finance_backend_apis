@@ -1,0 +1,86 @@
+
+
+# ----------------------
+# Node Modules
+# ----------------------
+node_modules/
+
+# ----------------------
+# Environment Variables
+# ----------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------
+# Logs
+# ----------------------
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ----------------------
+# Runtime Data
+# ----------------------
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# ----------------------
+# Coverage Directory
+# ----------------------
+coverage/
+
+# ----------------------
+# Build / Dist
+# ----------------------
+dist/
+build/
+
+# ----------------------
+# OS Files
+# ----------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# IDE / Editor
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ----------------------
+# Temporary Files
+# ----------------------
+tmp/
+temp/
+
+# ----------------------
+# Optional: Uploads
+# ----------------------
+uploads/
+
+# ----------------------
+# Optional: Cache
+# ----------------------
+.cache/
+
+# ----------------------
+# Optional: Testing
+# ----------------------
+jest.config.js
+coverage/
+
+# ----------------------
+# Optional: Lock Files (if needed)
+# ----------------------
+# package-lock.json
+# yarn.lock
+
+
+
