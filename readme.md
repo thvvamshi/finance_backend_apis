@@ -7,8 +7,8 @@
 ## 🔗 Live Links
 
 - 🌐 **Live API (Render)**: https://your-live-api.onrender.com/api  
-- 💻 **GitHub Repository**: https://github.com/your-username/finance-backend
-
+- 💻 **GitHub Repository**: [https://github.com/your-username/finance-backend
+](https://github.com/thvvamshi/finance_backend_apis)
 ---
 
 ## 🚀 Overview
