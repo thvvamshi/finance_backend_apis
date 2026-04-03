@@ -16,4 +16,13 @@ app.use("/api/dashboard", require("./routes/dashboard.routes"));
 // api for documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// check for server health
+app.get("/", (req, res) => {
+  res.send(`
+    <h2>🚀 Finance Backend API</h2>
+    <p>Status: <b style="color:green;">Running</b></p>
+    <p>Swagger Docs: <a href="/api-docs">/api-docs</a></p>
+  `);
+});
+
 module.exports = app;
