@@ -4,8 +4,8 @@
 
 ## 🔗 Quick Links
 
-- **Live API**: [link](https://finance-backend-apis-8l3w.onrender.com/)  
-- **Swagger Docs**: [Api doc link](https://finance-backend-apis-8l3w.onrender.com/api-docs)  
+- **Live API**: [Link](https://finance-backend-apis-8l3w.onrender.com/)  
+- **Swagger Docs**: [Api_doc_link](https://finance-backend-apis-8l3w.onrender.com/api-docs)  
 - **GitHub**: https://github.com/thvvamshi/finance_backend_apis  
 
 ---
