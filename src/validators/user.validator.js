@@ -6,26 +6,26 @@ const passwordSchema = z
   .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
   .regex(/[a-z]/, "Password must contain at least one lowercase letter")
   .regex(/[0-9]/, "Password must contain at least one number")
-  .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character");
+  .regex(/[^A-Za-z0-9]/,"Password must contain at least one special character",);
 
-// ✅ Email validation
-const emailSchema = z
-  .string()
-  .email("Invalid email format");
+// Email validation
+const emailSchema = z.string().email("Invalid email format");
 
-// ✅ Register validation schema
+//  Register validation schema
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
-
   email: emailSchema,
-
   password: passwordSchema,
+  role: z.enum(["VIEWER", "ANALYST", "ADMIN"]).optional(),
+});
 
-  role: z
-    .enum(["VIEWER", "ANALYST", "ADMIN"])
-    .optional()
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
 });
 
 module.exports = {
-  registerSchema
+  registerSchema,
+  loginSchema,
+  registerSchema,
 };

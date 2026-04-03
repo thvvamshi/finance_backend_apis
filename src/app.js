@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+const errorHandler = require("./middleware/error.middleware");
+
+app.use(errorHandler);
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/auth.routes"));

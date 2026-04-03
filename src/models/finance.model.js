@@ -10,4 +10,5 @@ const schema = new mongoose.Schema({
   isDeleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
+schema.index({ isDeleted: 1, category: 1, date: -1 });
 module.exports = mongoose.model("Finance", schema);

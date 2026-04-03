@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
+const mongoose = require("mongoose");
 
-// ✅ GET USERS
+//  GET USERS
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password");
@@ -20,7 +21,6 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// ✅ UPDATE ROLE (SAFE)
 exports.updateRole = async (req, res) => {
   try {
     const { role } = req.body;
@@ -62,12 +62,17 @@ exports.updateRole = async (req, res) => {
   }
 };
 
-// ✅ UPDATE STATUS (SAFE)
 exports.updateStatus = async (req, res) => {
   try {
     const { isActive } = req.body;
 
-    // 🔒 Ensure boolean
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user ID",
+      });
+    }
+
     if (typeof isActive !== "boolean") {
       return res.status(400).json({
         success: false,
@@ -78,7 +83,7 @@ exports.updateStatus = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       req.params.id,
       { isActive },
-      { new: true },
+      { new: true }
     ).select("-password");
 
     if (!user) {
@@ -93,12 +98,13 @@ exports.updateStatus = async (req, res) => {
       message: "User status updated successfully",
       data: user,
     });
+
   } catch (err) {
     console.error("UPDATE STATUS ERROR:", err.message);
 
     res.status(500).json({
       success: false,
-      message: err.message,
+      message: err.message || "Internal Server Error",
     });
   }
 };
