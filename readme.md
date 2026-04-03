@@ -91,7 +91,8 @@ finance-backend/
 │   │   ├── rbac.middleware.js
 │   │   └── validate.middleware.js
 │   ├── validators/
-│   │   └── schemas.js
+│   │   ├── finances.validator.js
+│   │   └── user.validator.js
 │   └── app.js
 ├── server.js
 ├── package.json
