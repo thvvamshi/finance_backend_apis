@@ -109,7 +109,6 @@ const { createFinance } = require("../validators/finance.validator");
  *       200:
  *         description: Deleted
  */
-// Add validation
 router.post("/", auth, allowRoles("ADMIN"), validate(createFinance), ctrl.create);
 router.get("/", auth, allowRoles("ANALYST", "ADMIN"), ctrl.getAll);
 router.put("/:id", auth, allowRoles("ADMIN"), ctrl.update);

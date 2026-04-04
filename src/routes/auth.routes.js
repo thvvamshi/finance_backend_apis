@@ -68,7 +68,6 @@ const { registerSchema , loginSchema } = require("../validators/user.validator")
  *         description: Invalid credentials
  */
 
-//  Add validation
 router.post("/register", validate(registerSchema), ctrl.register);
 router.post("/login", validate(loginSchema), ctrl.login);
 

@@ -89,7 +89,7 @@ exports.update = async (req, res) => {
   }
 };
 
-// DELETE
+// this is soft delete, we just set isDeleted to true, the record will not be removed from database
 exports.remove = async (req, res) => {
   try {
     await Finance.findByIdAndUpdate(req.params.id, { isDeleted: true });

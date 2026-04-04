@@ -25,7 +25,7 @@ exports.updateRole = async (req, res) => {
   try {
     const { role } = req.body;
 
-    // 🔒 Only allow valid roles
+    // Only allow valid roles
     const allowedRoles = ["VIEWER", "ANALYST", "ADMIN"];
     if (!allowedRoles.includes(role)) {
       return res.status(400).json({
