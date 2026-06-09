@@ -1,341 +1,258 @@
-# 💰 Finance Backend API Documentation
+# 💰 Finance Management API
 
-> Production-ready backend system with JWT authentication, RBAC, financial data management, and dashboard analytics.
-
-## 🔗 Quick Links
-
-- **Live API**: [Link](https://finance-backend-apis-8l3w.onrender.com/)  
-- **Swagger Docs**: [Api_doc_link](https://finance-backend-apis-8l3w.onrender.com/api-docs)  
-- **GitHub**: https://github.com/thvvamshi/finance_backend_apis  
+A production-ready backend system designed for managing financial records, user access control, and business analytics through secure REST APIs.
 
 ---
 
-## 🧱 Tech Stack
+## About The Project
 
-Node.js • Express.js • MongoDB • Mongoose • JWT • bcrypt • Zod • Swagger
+I built this project to explore how modern financial platforms manage sensitive data, enforce role-based permissions, and generate actionable insights from financial transactions.
 
----
+The system provides secure authentication, financial record management, user administration, and dashboard analytics through a structured REST API architecture.
 
-## 🔐 Authentication APIs
-
-### Register User
-```http
-POST /api/auth/register
-```
-
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "SecurePass@123",
-  "role": "ANALYST"
-}
-```
-
-**Response (201):**
-```json
-{
-  "success": true,
-  "message": "User registered successfully",
-  "data": {
-    "_id": "user_id",
-    "email": "john@example.com",
-    "role": "ANALYST"
-  }
-}
-```
+Beyond CRUD operations, this project focuses on production-ready backend engineering practices including authentication, authorization, validation, API documentation, security hardening, and scalable API design.
 
 ---
 
-### Login User
-```http
-POST /api/auth/login
-```
+## Features
 
-**Request Body:**
-```json
-{
-  "email": "john@example.com",
-  "password": "SecurePass@123"
-}
-```
+### 🔐 Authentication & Security
 
-**Response (200):**
-```json
-{
-  "success": true,
-  "message": "Login successful",
-  "token": "eyJhbGciOiJIUzI1NiIs..."
-}
-```
+* JWT Authentication
+* Password Hashing with bcrypt
+* Secure Login & Registration
+* Protected API Endpoints
+* Role-Based Access Control (RBAC)
 
----
+### 👥 User Management
 
-## 👤 User Management APIs (Admin Only)
+* User Registration
+* User Authentication
+* Role Management
+* Account Activation & Deactivation
+* Admin User Controls
 
-### Get All Users
-```http
-GET /api/users
-Authorization: Bearer <token>
-```
+### 💰 Financial Records
 
-**Response (200):**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "_id": "user_id",
-      "name": "John",
-      "email": "john@example.com",
-      "role": "ANALYST",
-      "isActive": true
-    }
-  ]
-}
-```
+* Create Financial Records
+* Update Financial Records
+* Soft Delete Support
+* Categorization
+* Income & Expense Tracking
+* Date-Based Filtering
+
+### 📊 Dashboard Analytics
+
+* Total Income
+* Total Expenses
+* Net Balance
+* Financial Overview Metrics
+
+### 📖 Developer Experience
+
+* Swagger API Documentation
+* Request Validation with Zod
+* Consistent API Responses
+* Production-Ready Architecture
 
 ---
 
-### Update User Role
-```http
-PATCH /api/users/:id/role
-Authorization: Bearer <token>
-```
+## Tech Stack
 
-**Request Body:**
-```json
-{
-  "role": "ADMIN"
-}
-```
+### Backend
 
-**Response (200):**
-```json
-{
-  "success": true,
-  "message": "User role updated successfully"
-}
+* Node.js
+* Express.js
+
+### Database
+
+* MongoDB
+* Mongoose
+
+### Authentication
+
+* JWT
+* bcrypt
+
+### Validation & Documentation
+
+* Zod
+* Swagger
+
+---
+
+## Architecture
+
+```text
+Client
+   │
+   ▼
+REST API
+   │
+   ▼
+Express.js
+   │
+   ├── Authentication Layer
+   ├── Authorization Layer
+   ├── Validation Layer
+   ├── Business Logic
+   └── Analytics Layer
+   │
+   ▼
+MongoDB
 ```
 
 ---
 
-### Update User Status
-```http
-PATCH /api/users/:id/status
-Authorization: Bearer <token>
+## API Capabilities
+
+### Authentication
+
+* Register Users
+* Login Users
+* Generate JWT Tokens
+
+### User Management
+
+* View Users
+* Update Roles
+* Manage User Status
+
+### Finance Management
+
+* Create Records
+* View Records
+* Update Records
+* Soft Delete Records
+* Filter Records
+
+### Dashboard
+
+* Income Summary
+* Expense Summary
+* Net Balance Analytics
+
+---
+
+## Access Control Matrix
+
+| Endpoint        | Viewer | Analyst | Admin |
+| --------------- | ------ | ------- | ----- |
+| Dashboard       | ✅      | ✅       | ✅     |
+| Finance Read    | ❌      | ✅       | ✅     |
+| Finance Write   | ❌      | ❌       | ✅     |
+| User Management | ❌      | ❌       | ✅     |
+
+---
+
+## API Documentation
+
+Interactive Swagger documentation is available at:
+
+```text
+/api-docs
 ```
 
-**Request Body:**
-```json
-{
-  "isActive": false
-}
-```
+The documentation includes:
 
-**Response (200):**
-```json
-{
-  "success": true,
-  "message": "User status updated successfully"
-}
+* Request Schemas
+* Response Schemas
+* Authentication Requirements
+* Error Responses
+* Example Requests
+
+---
+
+## Environment Variables
+
+```env
+PORT=5000
+
+MONGO_URI=mongodb+srv://...
+
+JWT_SECRET=your_secret_key
+
+BASE_URL=https://your-api.com/api
 ```
 
 ---
 
-## 💰 Finance Record APIs
+## Installation
 
-### Create Record
-```http
-POST /api/finance
-Authorization: Bearer <token>
-Content-Type: application/json
-```
-
-**Request Body:**
-```json
-{
-  "amount": 5000,
-  "type": "INCOME",
-  "category": "Salary",
-  "date": "2026-04-01",
-  "note": "Monthly salary"
-}
-```
-
-**Response (201):**
-```json
-{
-  "success": true,
-  "message": "Record created successfully",
-  "data": {
-    "_id": "record_id",
-    "amount": 5000,
-    "type": "INCOME",
-    "category": "Salary",
-    "date": "2026-04-01",
-    "createdAt": "2026-03-15T10:30:00Z"
-  }
-}
-```
-
----
-
-### Get All Records
-```http
-GET /api/finance?page=1&limit=10&type=INCOME&category=Salary
-Authorization: Bearer <token>
-```
-
-**Query Parameters:**
-- `page` (number): Page number (default: 1)
-- `limit` (number): Records per page (default: 10)
-- `type` (string): INCOME or EXPENSE
-- `category` (string): Filter by category
-- `startDate` (date): YYYY-MM-DD
-- `endDate` (date): YYYY-MM-DD
-
-**Response (200):**
-```json
-{
-  "success": true,
-  "total": 50,
-  "page": 1,
-  "totalPages": 5,
-  "data": [
-    {
-      "_id": "record_id",
-      "amount": 5000,
-      "type": "INCOME",
-      "category": "Salary",
-      "date": "2026-04-01",
-      "note": "Monthly salary"
-    }
-  ]
-}
-```
-
----
-
-### Update Record
-```http
-PUT /api/finance/:id
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "amount": 6000,
-  "category": "Bonus"
-}
-```
-
-**Response (200):**
-```json
-{
-  "success": true,
-  "message": "Record updated successfully"
-}
-```
-
----
-
-### Delete Record (Soft Delete)
-```http
-DELETE /api/finance/:id
-Authorization: Bearer <token>
-```
-
-**Response (200):**
-```json
-{
-  "success": true,
-  "message": "Record deleted successfully"
-}
-```
-
----
-
-## 📊 Dashboard API
-
-### Get Summary
-```http
-GET /api/dashboard/summary
-Authorization: Bearer <token>
-```
-
-**Response (200):**
-```json
-{
-  "success": true,
-  "data": {
-    "totalIncome": 50000,
-    "totalExpense": 15000,
-    "netBalance": 35000
-  }
-}
-```
-
----
-
-## 🔐 Access Control Matrix
-
-| Endpoint | Viewer | Analyst | Admin |
-|----------|--------|---------|-------|
-| Dashboard | ✅ | ✅ | ✅ |
-| Finance Read | ❌ | ✅ | ✅ |
-| Finance Write | ❌ | ❌ | ✅ |
-| User Mgmt | ❌ | ❌ | ✅ |
-
----
-
-## ⚠️ Error Response
-
-```json
-{
-  "success": false,
-  "message": "Error description"
-}
-```
-
-**Common Status Codes:**
-- `200` - OK
-- `201` - Created
-- `400` - Bad Request
-- `401` - Unauthorized
-- `403` - Forbidden
-- `404` - Not Found
-- `500` - Server Error
-
----
-
-## 🔒 Authentication
-
-Use JWT token in request headers:
-```
-Authorization: Bearer <your_jwt_token>
-```
-
----
-
-## ⚙️ Setup
+### Clone Repository
 
 ```bash
 git clone https://github.com/thvvamshi/finance_backend_apis
+
 cd finance_backend_apis
+```
+
+### Install Dependencies
+
+```bash
 npm install
+```
+
+### Start Development Server
+
+```bash
 npm run dev
 ```
 
 ---
 
-## 🌍 Environment Variables
+## Core Engineering Concepts Demonstrated
 
-```
-PORT=5000
-MONGO_URI=mongodb+srv://...
-JWT_SECRET=your_secret_key
-BASE_URL=https://your-api.com/api
-```
+* REST API Development
+* Authentication & Authorization
+* Role-Based Access Control
+* Financial Data Modeling
+* Dashboard Analytics
+* API Documentation
+* Request Validation
+* Backend Security
+* Production Deployment
+* Scalable Backend Design
+
+---
+
+## Future Improvements
+
+* Multi-Currency Support
+* Budget Planning
+* Financial Forecasting
+* CSV Export
+* Scheduled Reports
+* Email Notifications
+* Audit Logging
+* Advanced Analytics
+
+---
+
+## Learning Outcomes
+
+This project helped me gain hands-on experience with:
+
+* Secure backend development
+* Financial data management
+* JWT authentication workflows
+* Role-based authorization systems
+* MongoDB data modeling
+* API documentation best practices
+* Production-ready Express.js applications
+
+---
+
+## Author
+
+**Vamshi Kumar**
+
+Software Developer | Backend Engineer | System Design Enthusiast
+
+LinkedIn: https://www.linkedin.com/in/bodavamshikumar
+
+---
+
+## License
+
+MIT License
